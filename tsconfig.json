@@ -21,6 +21,9 @@
     "paths": {
       "ui": [
         "./dist/ui"
+      ],
+      "web": [
+        "./dist/web"
       ]
     },
     "lib": [

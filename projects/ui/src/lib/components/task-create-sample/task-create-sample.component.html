@@ -1,1 +1,61 @@
-<p>task-create-sample works!</p>
+<mat-card>
+  <mat-card-content>
+
+    <div>
+      <mat-form-field>
+        <mat-label>Title task</mat-label>
+        <input matInput title="titleTask"  [(ngModel)]="titleTask">
+        @if (titleTask) {
+          <button matSuffix mat-icon-button aria-label="Clear" (click)="titleTask=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field>
+        <mat-label>Description task</mat-label>
+        <textarea matInput [(ngModel)]="descriptionTask"></textarea>
+        @if (descriptionTask) {
+          <button matSuffix mat-icon-button aria-label="Clear" (click)="descriptionTask=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+      </mat-form-field>
+    </div>
+
+    <div align="center">
+        <button mat-stroked-button [matMenuTriggerFor]="executor">Executor</button>
+        <mat-menu #executor="matMenu">
+          <button mat-menu-item>Item 1</button>
+          <button mat-menu-item>Item 2</button>
+        </mat-menu>
+    </div>
+
+    <div align="center">
+      <button mat-stroked-button>Dealine</button>
+    </div>
+
+    <div align="center">
+      <button mat-stroked-button [matMenuTriggerFor]="priority">Priority</button>
+      <mat-menu #priority="matMenu">
+        <button mat-menu-item>Item 1</button>
+        <button mat-menu-item>Item 2</button>
+      </mat-menu>
+    </div>
+
+    <div align="center">
+      <button mat-stroked-button [matMenuTriggerFor]="status">Status</button>
+      <mat-menu #status="matMenu">
+        <button mat-menu-item>Item 1</button>
+        <button mat-menu-item>Item 2</button>
+      </mat-menu>
+    </div>
+
+    <mat-card-actions>
+      <button mat-button (click)="createTask(titleTask, descriptionTask)">Close</button>
+      <button  mat-button [disabled]="!titleTask || !descriptionTask" (click)="createTask(titleTask, descriptionTask)">add task</button>
+    </mat-card-actions>
+  </mat-card-content>
+</mat-card>

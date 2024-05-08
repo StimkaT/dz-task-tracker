@@ -1,0 +1,31 @@
+table, th, td {
+  border: 2px solid gray;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.task-name {
+  text-align: left;
+}
+
+td {
+  text-align: center;
+  align-items: center;
+  padding: 5px;
+}
+
+.non-bord {
+  border-right: none;
+  text-align: right;
+}
+
+.butt {
+  text-align: start;
+  border: none;
+}
+
+
+
