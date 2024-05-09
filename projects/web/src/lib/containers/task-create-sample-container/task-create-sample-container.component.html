@@ -1,1 +1,6 @@
-<task-create-sample></task-create-sample>
+<task-create-sample
+  [priorityList]="(priorityList$ | async)"
+  [executorList]="(executorList$ | async)"
+  [statusList]="(statusList$ | async)"
+  (emitter)="events($event)">
+</task-create-sample>

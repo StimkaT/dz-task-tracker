@@ -1,35 +1,36 @@
-<table class="table">
-  <tr>
-    <th>Task name</th>
-    <th class="non-bord">Deadline </th>
-    <th class="butt">
-      <button mat-icon-button><mat-icon>swap_vert</mat-icon></button>
-    </th>
-    <th class="non-bord">Executor </th>
-    <th class="butt">
-      <button mat-icon-button><mat-icon>swap_vert</mat-icon></button>
-    </th>
-    <th class="non-bord">Priority </th>
-    <th class="butt">
-      <button mat-icon-button><mat-icon>swap_vert</mat-icon></button>
-    </th>
-    <th class="non-bord">Status </th>
-    <th class="butt">
-      <button mat-icon-button><mat-icon class="mat-icon">swap_vert</mat-icon></button>
-    </th>
-  </tr>
-  <tr>
-    <td class="task-name">name</td>
-    <td colspan="2">Deadline 2</td>
-    <td colspan="2">Executor 2</td>
-    <td colspan="2">Priority 2</td>
-    <td colspan="2">Status 2</td>
-  </tr>  <tr>
-  <td class="task-name">name</td>
-  <td colspan="2">Deadline 2</td>
-  <td colspan="2">Executor 2</td>
-  <td colspan="2">Priority 2</td>
-  <td colspan="2">Status 2</td>
-</tr>
-
-</table>
+<div>
+  <table class="table">
+    <tr>
+      <th>Task name</th>
+      <th class="non-bord">Deadline </th>
+      <th class="butt">
+        <button mat-icon-button><mat-icon>swap_vert</mat-icon></button>
+      </th>
+      <th class="non-bord">Executor </th>
+      <th class="butt">
+        <button mat-icon-button><mat-icon>swap_vert</mat-icon></button>
+      </th>
+      <th class="non-bord">Priority </th>
+      <th class="butt">
+        <button mat-icon-button><mat-icon>swap_vert</mat-icon></button>
+      </th>
+      <th class="non-bord">Status </th>
+      <th class="butt">
+        <button mat-icon-button><mat-icon class="mat-icon">swap_vert</mat-icon></button>
+      </th>
+    </tr>
+    @for (task of tasksList; track task.id) {
+      <tr>
+        <td class="task-name" (click)="buttonClick(task.id, 'openTask')">{{ task.name}}
+          <button mat-icon-button>
+            <mat-icon class="mat-icon">edit</mat-icon>
+          </button>
+        </td>
+        <td colspan="2"><button mat-button color="primary">{{ task.properties.deadline }}</button></td>
+        <td colspan="2"><button mat-button color="primary">{{ task.properties.executor }}</button></td>
+        <td colspan="2"><button mat-button color="primary">{{ task.properties.priority }}</button></td>
+        <td colspan="2"><button mat-button color="primary">{{ task.properties.status }}</button></td>
+      </tr>
+    }
+  </table>
+</div>

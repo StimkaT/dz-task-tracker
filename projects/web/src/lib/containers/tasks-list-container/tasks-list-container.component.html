@@ -1,1 +1,1 @@
-<tasks-list-page></tasks-list-page>
+<tasks-list [tasksList]="(tasksList$ | async)"  (emitter)="events($event)"></tasks-list>

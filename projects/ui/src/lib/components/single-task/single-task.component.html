@@ -2,7 +2,7 @@
   <div class="grid-item title"><h2>Title</h2></div>
   <div class="grid-item executor">Executor</div>
   <div class="grid-item name">
-    <button [matMenuTriggerFor]="executor">name</button>
+    <button [matMenuTriggerFor]="executor" mat-button color = "primary">name</button>
     <mat-menu #executor="matMenu">
       <button mat-menu-item>Item 1</button>
       <button mat-menu-item>Item 2</button>
@@ -26,14 +26,16 @@
   </div>
   <div class="grid-item status">Status</div>
   <div class="grid-item status-menu">
-    <button [matMenuTriggerFor]="status">Menu</button>
+    <button [matMenuTriggerFor]="status" mat-button color = "primary">Menu</button>
     <mat-menu #status="matMenu">
       <button mat-menu-item>Item 1</button>
       <button mat-menu-item>Item 2</button>
     </mat-menu>
   </div>
-  <div class="grid-item description">Описание</div>
+  <div class="grid-item description">Description</div>
   <div class="grid-item description-field">поле описания</div>
-  <div class="grid-item button"><button>выполнено</button></div>
+  <div class="grid-item button">
+    <button mat-button color = "primary">выполнено</button>
+  </div>
 </div>
 

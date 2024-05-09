@@ -5,7 +5,6 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
-import {TaskCreateSampleComponent} from "../task-create-sample/task-create-sample.component";
 
 @Component({
   selector: 'nav-panel',

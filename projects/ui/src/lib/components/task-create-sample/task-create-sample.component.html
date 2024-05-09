@@ -4,9 +4,9 @@
     <div>
       <mat-form-field>
         <mat-label>Title task</mat-label>
-        <input matInput title="titleTask"  [(ngModel)]="titleTask">
-        @if (titleTask) {
-          <button matSuffix mat-icon-button aria-label="Clear" (click)="titleTask=''">
+        <input matInput title="name"  [(ngModel)]="name">
+        @if (name) {
+          <button matSuffix mat-icon-button aria-label="Clear" (click)="name=''">
             <mat-icon>close</mat-icon>
           </button>
         }
@@ -16,9 +16,9 @@
     <div>
       <mat-form-field>
         <mat-label>Description task</mat-label>
-        <textarea matInput [(ngModel)]="descriptionTask"></textarea>
-        @if (descriptionTask) {
-          <button matSuffix mat-icon-button aria-label="Clear" (click)="descriptionTask=''">
+        <textarea matInput [(ngModel)]="description"></textarea>
+        @if (description) {
+          <button matSuffix mat-icon-button aria-label="Clear" (click)="description=''">
             <mat-icon>close</mat-icon>
           </button>
         }
@@ -26,36 +26,39 @@
     </div>
 
     <div align="center">
-        <button mat-stroked-button [matMenuTriggerFor]="executor">Executor</button>
+        <button mat-stroked-button [matMenuTriggerFor]="executor">{{ User }}</button>
         <mat-menu #executor="matMenu">
-          <button mat-menu-item>Item 1</button>
-          <button mat-menu-item>Item 2</button>
+          @for (item of executorList; track name) {
+            <button mat-menu-item (click)="buttonClick(item.name, 'setExecutor')">{{ item.name }}</button>
+          }
         </mat-menu>
     </div>
 
     <div align="center">
-      <button mat-stroked-button>Dealine</button>
+      <button mat-stroked-button>{{ Deadline }}</button>
     </div>
 
     <div align="center">
-      <button mat-stroked-button [matMenuTriggerFor]="priority">Priority</button>
+      <button mat-stroked-button [matMenuTriggerFor]="priority">{{ Priority }}</button>
       <mat-menu #priority="matMenu">
-        <button mat-menu-item>Item 1</button>
-        <button mat-menu-item>Item 2</button>
+        @for (item of priorityList; track name) {
+        <button mat-menu-item (click)="buttonClick(item.name, 'setPriority')">{{ item.name }}</button>
+        }
       </mat-menu>
     </div>
 
     <div align="center">
-      <button mat-stroked-button [matMenuTriggerFor]="status">Status</button>
+      <button mat-stroked-button [matMenuTriggerFor]="status">{{ Status }}</button>
       <mat-menu #status="matMenu">
-        <button mat-menu-item>Item 1</button>
-        <button mat-menu-item>Item 2</button>
+        @for (item of statusList; track name) {
+          <button mat-menu-item (click)="buttonClick(item.name, 'setStatus')">{{ item.name }}</button>
+        }
       </mat-menu>
     </div>
 
     <mat-card-actions>
-      <button mat-button (click)="createTask(titleTask, descriptionTask)">Close</button>
-      <button  mat-button [disabled]="!titleTask || !descriptionTask" (click)="createTask(titleTask, descriptionTask)">add task</button>
+      <button mat-button (click)="createTask(name, description)">Close</button>
+      <button  mat-button [disabled]="!name || !description" (click)="createTask(name, description)">add task</button>
     </mat-card-actions>
   </mat-card-content>
 </mat-card>
