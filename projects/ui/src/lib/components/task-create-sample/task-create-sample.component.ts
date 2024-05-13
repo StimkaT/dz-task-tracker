@@ -15,6 +15,8 @@ import {MatDatepicker, MatDatepickerInput, MatDatepickerModule} from "@angular/m
 import { IProperty } from "../../../../../web/src/lib/+state/tasks/tasks.reducer";
 import {provideNativeDateAdapter} from "@angular/material/core";
 import {AsyncPipe} from "@angular/common";
+import {TaskCreatePropertyComponent} from "../task-create-property/task-create-property.component";
+import {SingleTaskComponent} from "../single-task/single-task.component";
 
 @Component({
   selector: 'task-create-sample',
@@ -38,6 +40,8 @@ import {AsyncPipe} from "@angular/common";
     MatDatepickerInput,
     MatDatepickerModule,
     AsyncPipe,
+    TaskCreatePropertyComponent,
+    SingleTaskComponent,
   ],
   templateUrl: './task-create-sample.component.html',
   styleUrl: './task-create-sample.component.scss'
@@ -55,9 +59,6 @@ export class TaskCreateSampleComponent {
   Priority = 'Priority';
   Status = 'Status';
   Deadline = 0;
-
-
-
 
   buttonClick(event: string, note: string) {
     if (note === 'setPriority') {
@@ -97,6 +98,15 @@ export class TaskCreateSampleComponent {
     const message = {
       event: 'ToDoComponent:buttonClick',
       rout: event$
+    };
+    this.emitter.emit(message)
+  }
+
+
+  events(event: any, note:string) {
+    const message = {
+      event,
+      note
     };
     this.emitter.emit(message)
   }

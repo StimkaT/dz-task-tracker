@@ -1,4 +1,4 @@
-@if (activeTask) {
+@if (activeTask && activeTask[0]) {
   <div class="grid-container">
     <div class="grid-item title"><h2>{{ activeTask[0].name }}</h2></div>
     <div class="grid-item executor">Executor</div>

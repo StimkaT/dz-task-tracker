@@ -55,11 +55,11 @@
       </th>
     </tr>
     </thead>
+
     <tbody>
     @for (task of tasksList; track task.id) {
       <tr>
         <td class="task-name"> <span (click)="buttonClick(task.id, 'openTask')">{{ task.name}}</span>
-
         </td>
         <td class="edit">
           <button mat-icon-button>

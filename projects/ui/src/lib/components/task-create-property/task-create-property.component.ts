@@ -22,7 +22,7 @@ export class TaskCreatePropertyComponent {
  @Output() emitter = new EventEmitter<any>();
 
   buttonClick(event: any): void {
-    this.emitter.emit()
-}
+    this.emitter.emit(event)
+  }
 
 }

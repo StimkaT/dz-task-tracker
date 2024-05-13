@@ -21,7 +21,7 @@ import {
 } from "../../+state/tasks/tasks.actions";
 import {filter} from "rxjs";
 
-export const TASK_LOCALSTORAGE_KEY = 'task'
+
 
 @Component({
   selector: 'tasks-list-container',
@@ -40,25 +40,6 @@ export class TasksListContainerComponent {
     private router: Router,
   ) {}
 
-  private loadStorage: boolean = false;
-
-  ngOnInit() {
-    if (this.loadStorage) {
-      return
-    }
-
-    this.loadStorage = true;
-
-    this.loadFromStorage();
-  }
-
-  private loadFromStorage() {
-    const storageState = localStorage.getItem(TASK_LOCALSTORAGE_KEY);
-    console.log('из локала получили', storageState);
-    if (storageState) {
-      this.store$.dispatch(loadState({loadState: JSON.parse(storageState)}));
-    }
-  }
 
   tasksList$ = this.store$.select(getActiveTaskList);
   priorityList$ = this.store$.select(getPriorityList);
@@ -67,41 +48,33 @@ export class TasksListContainerComponent {
 
   events($event: any) {
     if ($event.note === 'openTask') {
-    this.router.navigate(['task', $event.event]);
-    } else if ($event.note === 'filterStatus'){
-        this.store$.dispatch(setFilterStatus({name: $event.event}))
-    } else if ($event.note === 'filterPriority'){
-        this.store$.dispatch(setFilterPriority({name: $event.event}))
-    } else if ($event.note === 'filterExecutor'){
-        this.store$.dispatch(setFilterExecutor({name: $event.event}))
-    } else if ($event.note === 'clearFilter'){
-        this.store$.dispatch(clearFilter())
-    }
-      if ($event.note === 'deleteTask') {
+      this.router.navigate(['task', $event.event]);
+    } else if ($event.note === 'filterStatus') {
+      this.store$.dispatch(setFilterStatus({name: $event.event}))
+    } else if ($event.note === 'filterPriority') {
+      this.store$.dispatch(setFilterPriority({name: $event.event}))
+    } else if ($event.note === 'filterExecutor') {
+      this.store$.dispatch(setFilterExecutor({name: $event.event}))
+    } else if ($event.note === 'clearFilter') {
+      this.store$.dispatch(clearFilter());
+    } else if ($event.note === 'deleteTask') {
       this.store$.dispatch(deleteTask({id: $event.event}));
-    }
-      if ($event.note === 'editTask') {
+    } else if ($event.note === 'editTask') {
       this.store$.dispatch(editTask({id: $event.event.id, name: $event.event.name}));
-    }
-
-    if ($event.note === 'setExecutor') {
+    } else if ($event.note === 'setExecutor') {
       this.store$.dispatch(resetExecutor({id: $event.id, name: $event.name}));
-    }
-
-    if ($event.note === 'setPriority') {
+    } else if ($event.note === 'setPriority') {
       this.store$.dispatch(resetPriority({id: $event.id, name: $event.name}));
-    }
-
-    if ($event.note === 'setStatus') {
+    } else if ($event.note === 'setStatus') {
       this.store$.dispatch(resetStatus({id: $event.id, name: $event.name}));
     }
-
-    this.store$.pipe(
-      select(selectFeature),
-      filter(state => !!state)
-    ).subscribe(state => {
-      localStorage.setItem(TASK_LOCALSTORAGE_KEY, JSON.stringify(state));
-    })
+    //
+    // this.store$.pipe(
+    //   select(selectFeature),
+    //   filter(state => !!state)
+    // ).subscribe(state => {
+    //   localStorage.setItem(TASK_LOCALSTORAGE_KEY, JSON.stringify(state));
+    // })
   }
 
 
