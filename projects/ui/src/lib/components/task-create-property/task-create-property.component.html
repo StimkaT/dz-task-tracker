@@ -1,0 +1,8 @@
+<mat-form-field>
+  <mat-label>Select {{ label }}</mat-label>
+  <mat-select disableRipple>
+    @for (item of propertyList; track item.name) {
+      <mat-option (click)="buttonClick(item.name)" [value]="item.name">{{ item.name }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>

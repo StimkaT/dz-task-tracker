@@ -28,11 +28,12 @@ import {IProperty, ITasksList} from "../../../../../web/src/lib/+state/tasks/tas
   styleUrl: './single-task.component.scss'
 })
 export class SingleTaskComponent {
-  @Output() emitter = new EventEmitter<any>();
   @Input() activeTask: ITasksList[] | null = [];
   @Input() executorList: IProperty[] | null = [];
   @Input() priorityList: IProperty[] | null = [];
   @Input() statusList: IProperty[] | null = [];
+
+  @Output() emitter = new EventEmitter<any>();
 
   today = new Date();
 

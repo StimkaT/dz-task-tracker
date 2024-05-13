@@ -80,7 +80,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "ApplicationConfig",
-                "defaultValue": "{\r\n  providers: [provideRouter(routes), provideClientHydration(), provideAnimationsAsync()]\r\n}"
+                "defaultValue": "{\r\n  providers: [\r\n    provideRouter(routes),\r\n    provideClientHydration(),\r\n    provideAnimationsAsync(),\r\n    provideStore(),\r\n    provideEffects(TasksEffects),\r\n    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),\r\n    provideState(TASKS_FEATURE_KEY, TasksReducer),\r\n  ]\r\n}"
             },
             {
                 "name": "bootstrap",
@@ -126,7 +126,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "ApplicationConfig",
-                    "defaultValue": "{\r\n  providers: [provideRouter(routes), provideClientHydration(), provideAnimationsAsync()]\r\n}"
+                    "defaultValue": "{\r\n  providers: [\r\n    provideRouter(routes),\r\n    provideClientHydration(),\r\n    provideAnimationsAsync(),\r\n    provideStore(),\r\n    provideEffects(TasksEffects),\r\n    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),\r\n    provideState(TASKS_FEATURE_KEY, TasksReducer),\r\n  ]\r\n}"
                 }
             ],
             "src/main.server.ts": [

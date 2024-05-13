@@ -23,11 +23,12 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './tasks-list.component.scss'
 })
 export class TasksListComponent {
-  @Output() emitter = new EventEmitter<any>();
   @Input() tasksList: ITasksList[] | null = [];
   @Input() executorList: IProperty[] | null = [];
   @Input() priorityList: IProperty[] | null = [];
   @Input() statusList: IProperty[] | null = [];
+
+  @Output() emitter = new EventEmitter<any>();
 
   buttonClick(event: any, note: string) {
     const message = {

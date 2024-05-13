@@ -19,14 +19,14 @@
   padding-top: 20px;
 }
 .executor { grid-area: 2 / 1 / 3 / 2; }
-.name { grid-area: 2 / 2 / 3 / 3; }
+.executor-value { grid-area: 2 / 2 / 3 / 4; }
 .deadline { grid-area: 3 / 1 / 4 / 2; }
-.datepicker { grid-area: 3 / 2 / 4 / 3; }
+.deadline-value { grid-area: 3 / 2 / 4 / 4; }
 .priority { grid-area: 4 / 1 / 5 / 2; }
-.menu { grid-area: 4 / 2 / 5 / 3; }
+.priority-value { grid-area: 4 / 2 / 5 / 4; }
 .status { grid-area: 5 / 1 / 6 / 2; }
-.status-menu { grid-area: 5 / 2 / 6 / 3; }
+.status-value { grid-area: 5 / 2 / 6 / 4; }
 .description { grid-area: 6 / 1 / 7 / 4; }
-.description-field { grid-area: 7 / 1 / 8 / 4; }
+.description-value { grid-area: 7 / 1 / 8 / 4; }
 .button { grid-area: 8 / 3 / 9 / 4; }
 

@@ -68,11 +68,11 @@ export class TasksListContainerComponent {
   events($event: any) {
     if ($event.note === 'openTask') {
     this.router.navigate(['task', $event.event]);
-    } else if ($event.note === 'setStatus'){
+    } else if ($event.note === 'filterStatus'){
         this.store$.dispatch(setFilterStatus({name: $event.event}))
-    } else if ($event.note === 'setPriority'){
+    } else if ($event.note === 'filterPriority'){
         this.store$.dispatch(setFilterPriority({name: $event.event}))
-    } else if ($event.note === 'setExecutor'){
+    } else if ($event.note === 'filterExecutor'){
         this.store$.dispatch(setFilterExecutor({name: $event.event}))
     } else if ($event.note === 'clearFilter'){
         this.store$.dispatch(clearFilter())

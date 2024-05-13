@@ -1,11 +1,11 @@
 import {argsToTemplate, componentWrapperDecorator, Meta, moduleMetadata, StoryObj} from '@storybook/angular';
+import {TaskCreateSampleComponent} from "./task-create-sample.component";
 import { action } from '@storybook/addon-actions';
-import {SingleTaskComponent} from "./single-task.component";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
-const meta: Meta<SingleTaskComponent> = {
-  title: 'UI Components/SingleTaskComponent',
-  component: SingleTaskComponent,
+const meta: Meta<TaskCreateSampleComponent> = {
+  title: 'UI Components/TaskCreateSampleComponent',
+  component: TaskCreateSampleComponent,
   decorators: [
     moduleMetadata({
       imports: [
@@ -22,28 +22,16 @@ const meta: Meta<SingleTaskComponent> = {
       events: action('emitter'),
     },
     template: `
-        <single-task-page ${argsToTemplate(args)} (emitter)="events($event)"></single-task-page>
+        <task-create-sample ${argsToTemplate(args)} (emitter)="events($event)"></task-create-sample>
     `,
   }),
 };
 
 export default meta;
-type Story = StoryObj<SingleTaskComponent>;
+type Story = StoryObj<TaskCreateSampleComponent>;
 
 export const Primary: Story = {
   args: {
-    activeTask: [{
-      id: 1,
-      name: 'Task1',
-      description: 'Work Task1',
-      properties: {
-        executor: 'User1',
-        deadline: 1,
-        priority: 'High',
-        status: 'In progress',
-      },
-    }],
-
     executorList: [
       {name: 'User1', active: false},
       {name: 'User2', active: false},

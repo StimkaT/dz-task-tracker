@@ -22,7 +22,7 @@
         </button>
         <mat-menu #executor="matMenu">
           @for (item of executorList; track item.name) {
-            <button mat-menu-item (click)="buttonClick(item.name, 'setExecutor')">{{ item.name }}</button>
+            <button mat-menu-item (click)="buttonClick(item.name, 'filterExecutor')">{{ item.name }}</button>
           }
         </mat-menu>
       </th>
@@ -34,7 +34,7 @@
         </button>
         <mat-menu #priority="matMenu">
           @for (item of priorityList; track item.name) {
-            <button mat-menu-item (click)="buttonClick(item.name, 'setPriority')">{{ item.name }}</button>
+            <button mat-menu-item (click)="buttonClick(item.name, 'filterPriority')">{{ item.name }}</button>
           }
         </mat-menu>
       </th>
@@ -46,7 +46,7 @@
         </button>
         <mat-menu #status="matMenu">
           @for (item of statusList; track item.name) {
-            <button mat-menu-item (click)="buttonClick(item.name, 'setStatus')">{{ item.name }}</button>
+            <button mat-menu-item (click)="buttonClick(item.name, 'filterStatus')">{{ item.name }}</button>
           }
         </mat-menu>
       </th>

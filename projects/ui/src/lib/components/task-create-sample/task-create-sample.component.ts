@@ -14,6 +14,7 @@ import {MatMenu, MatMenuItem, MatMenuModule} from "@angular/material/menu";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerModule} from "@angular/material/datepicker";
 import { IProperty } from "../../../../../web/src/lib/+state/tasks/tasks.reducer";
 import {provideNativeDateAdapter} from "@angular/material/core";
+import {AsyncPipe} from "@angular/common";
 
 @Component({
   selector: 'task-create-sample',
@@ -36,15 +37,17 @@ import {provideNativeDateAdapter} from "@angular/material/core";
     MatDatepicker,
     MatDatepickerInput,
     MatDatepickerModule,
+    AsyncPipe,
   ],
   templateUrl: './task-create-sample.component.html',
   styleUrl: './task-create-sample.component.scss'
 })
 export class TaskCreateSampleComponent {
-  @Output() emitter = new EventEmitter<any>();
   @Input() executorList: IProperty[] | null = [];
   @Input() priorityList: IProperty[] | null = [];
   @Input() statusList: IProperty[] | null = [];
+
+  @Output() emitter = new EventEmitter<any>();
 
   name = '';
   description = '';
