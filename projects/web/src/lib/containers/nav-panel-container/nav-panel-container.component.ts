@@ -9,7 +9,6 @@ import {Router} from "@angular/router";
   standalone: true,
   imports: [
     NavPanelComponent,
-
   ],
   templateUrl: './nav-panel-container.component.html',
   styleUrl: './nav-panel-container.component.scss'
@@ -28,10 +27,6 @@ export class NavPanelContainerComponent {
       const dialogRef = this.dialog.open(TaskCreateSampleContainerComponent, {
         data: {},
       });
-
-      // dialogRef.afterClosed().subscribe(result => {
-      //   console.log('The dialog was closed');
-      // });
     } else if ($event === 'tasksList') {
       this.router.navigate(['']);
     }

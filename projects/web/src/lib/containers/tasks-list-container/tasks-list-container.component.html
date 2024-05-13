@@ -1,1 +1,7 @@
-<tasks-list [tasksList]="(tasksList$ | async)"  (emitter)="events($event)"></tasks-list>
+<tasks-list
+  [tasksList]="(tasksList$ | async)"
+  (emitter)="events($event)"
+  [priorityList]="(priorityList$ | async)"
+  [executorList]="(executorList$ | async)"
+  [statusList]="(statusList$ | async)">
+</tasks-list>

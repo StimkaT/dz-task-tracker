@@ -1,41 +1,40 @@
-<div class="grid-container">
-  <div class="grid-item title"><h2>Title</h2></div>
-  <div class="grid-item executor">Executor</div>
-  <div class="grid-item name">
-    <button [matMenuTriggerFor]="executor" mat-button color = "primary">name</button>
-    <mat-menu #executor="matMenu">
-      <button mat-menu-item>Item 1</button>
-      <button mat-menu-item>Item 2</button>
-    </mat-menu>
+@if (activeTask) {
+  <div class="grid-container">
+    <div class="grid-item title"><h2>{{ activeTask[0].name }}</h2></div>
+    <div class="grid-item executor">Executor</div>
+    <div class="grid-item name">
+      <button [matMenuTriggerFor]="executor" mat-button color = "primary">{{ activeTask[0].properties.executor }}</button>
+      <mat-menu #executor="matMenu">
+        @for (item of executorList; track item.name) {
+          <button mat-menu-item (click)="buttonClick(item.name, activeTask[0].id, 'setExecutor')">{{ item.name }}</button>
+        }
+      </mat-menu>
+    </div>
+    <div class="grid-item deadline">Deadline</div>
+    <div class="grid-item datepicker">
+    </div>
+    <div class="grid-item priority">Priority</div>
+    <div class="grid-item menu">
+      <button mat-button color = "primary" [matMenuTriggerFor]="priority">{{ activeTask[0].properties.priority }}</button>
+      <mat-menu #priority="matMenu">
+        @for (item of priorityList; track item.name) {
+          <button mat-menu-item (click)="buttonClick(item.name, activeTask[0].id, 'setPriority')">{{ item.name }}</button>
+        }
+      </mat-menu>
+    </div>
+    <div class="grid-item status">Status</div>
+    <div class="grid-item status-menu">
+      <button [matMenuTriggerFor]="status" mat-button color = "primary">{{ activeTask[0].properties.status }}</button>
+      <mat-menu #status="matMenu">
+        @for (item of statusList; track item.name) {
+          <button mat-menu-item (click)="buttonClick(item.name, activeTask[0].id, 'setStatus')">{{ item.name }}</button>
+        }
+      </mat-menu>
+    </div>
+    <div class="grid-item description">Description</div>
+    <div class="grid-item description-field">{{ activeTask[0].description }}</div>
+    <div class="grid-item button">
+      <button mat-button color = "primary" (click)="buttonClick('Done', activeTask[0].id, 'setStatus')">выполнено</button>
+    </div>
   </div>
-  <div class="grid-item deadline">Deadline</div>
-  <div class="grid-item datepicker">
-    <mat-form-field class="example-full-width">
-      <mat-label>Choose a date</mat-label>
-      <input (click)="picker.open()" matInput [matDatepicker]="picker">
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-  </div>
-  <div class="grid-item priority">Priority</div>
-  <div class="grid-item menu">
-    <button mat-button color = "primary" [matMenuTriggerFor]="priority">Menu</button>
-    <mat-menu #priority="matMenu">
-      <button mat-menu-item>Item 1</button>
-      <button mat-menu-item>Item 2</button>
-    </mat-menu>
-  </div>
-  <div class="grid-item status">Status</div>
-  <div class="grid-item status-menu">
-    <button [matMenuTriggerFor]="status" mat-button color = "primary">Menu</button>
-    <mat-menu #status="matMenu">
-      <button mat-menu-item>Item 1</button>
-      <button mat-menu-item>Item 2</button>
-    </mat-menu>
-  </div>
-  <div class="grid-item description">Description</div>
-  <div class="grid-item description-field">поле описания</div>
-  <div class="grid-item button">
-    <button mat-button color = "primary">выполнено</button>
-  </div>
-</div>
-
+}

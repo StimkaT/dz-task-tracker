@@ -26,5 +26,4 @@ export class NavPanelComponent {
   buttonClick(event: string) {
     this.emitter.emit(event);
   }
-
 }

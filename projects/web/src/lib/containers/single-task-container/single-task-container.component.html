@@ -1,1 +1,7 @@
-<single-task-page></single-task-page>
+<single-task-page
+  [activeTask]="activeTask$|async"
+  (emitter)="events($event)"
+  [priorityList]="(priorityList$ | async)"
+  [executorList]="(executorList$ | async)"
+  [statusList]="(statusList$ | async)">
+></single-task-page>

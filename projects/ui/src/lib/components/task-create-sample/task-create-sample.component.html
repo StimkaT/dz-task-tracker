@@ -35,7 +35,12 @@
     </div>
 
     <div align="center">
-      <button mat-stroked-button>{{ Deadline }}</button>
+      <mat-form-field (click)="picker.open()">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
     </div>
 
     <div align="center">
@@ -57,7 +62,7 @@
     </div>
 
     <mat-card-actions>
-      <button mat-button (click)="createTask(name, description)">Close</button>
+      <button mat-button (click)="closePop()">Close</button>
       <button  mat-button [disabled]="!name || !description" (click)="createTask(name, description)">add task</button>
     </mat-card-actions>
   </mat-card-content>

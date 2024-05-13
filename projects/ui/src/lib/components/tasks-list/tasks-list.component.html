@@ -1,36 +1,109 @@
 <div>
   <table class="table">
+    <thead>
     <tr>
-      <th>Task name</th>
-      <th class="non-bord">Deadline </th>
-      <th class="butt">
-        <button mat-icon-button><mat-icon>swap_vert</mat-icon></button>
-      </th>
-      <th class="non-bord">Executor </th>
-      <th class="butt">
-        <button mat-icon-button><mat-icon>swap_vert</mat-icon></button>
-      </th>
-      <th class="non-bord">Priority </th>
-      <th class="butt">
-        <button mat-icon-button><mat-icon>swap_vert</mat-icon></button>
-      </th>
-      <th class="non-bord">Status </th>
-      <th class="butt">
-        <button mat-icon-button><mat-icon class="mat-icon">swap_vert</mat-icon></button>
+      <th colspan="11" align="end">
+        <button mat-raised-button color="accent" (click)="buttonClick('clear', 'clearFilter')"> clear filter</button>
       </th>
     </tr>
+    <tr>
+      <th colspan="2" class="name">Task name</th>
+      <th class="non-bord">Deadline </th>
+      <th class="butt">
+        <button mat-icon-button>
+          <mat-icon>swap_vert</mat-icon>
+        </button>
+      </th>
+
+      <th class="non-bord">Executor </th>
+      <th class="butt">
+        <button mat-icon-button [matMenuTriggerFor]="executor">
+          <mat-icon>filter_list</mat-icon>
+        </button>
+        <mat-menu #executor="matMenu">
+          @for (item of executorList; track item.name) {
+            <button mat-menu-item (click)="buttonClick(item.name, 'setExecutor')">{{ item.name }}</button>
+          }
+        </mat-menu>
+      </th>
+
+      <th class="non-bord">Priority </th>
+      <th class="butt">
+        <button mat-icon-button [matMenuTriggerFor]="priority">
+          <mat-icon>filter_list</mat-icon>
+        </button>
+        <mat-menu #priority="matMenu">
+          @for (item of priorityList; track item.name) {
+            <button mat-menu-item (click)="buttonClick(item.name, 'setPriority')">{{ item.name }}</button>
+          }
+        </mat-menu>
+      </th>
+
+      <th class="non-bord">Status </th>
+      <th class="butt">
+        <button mat-icon-button [matMenuTriggerFor]="status">
+          <mat-icon class="mat-icon">filter_list</mat-icon>
+        </button>
+        <mat-menu #status="matMenu">
+          @for (item of statusList; track item.name) {
+            <button mat-menu-item (click)="buttonClick(item.name, 'setStatus')">{{ item.name }}</button>
+          }
+        </mat-menu>
+      </th>
+      <th class="deleteCol">
+
+      </th>
+    </tr>
+    </thead>
+    <tbody>
     @for (task of tasksList; track task.id) {
       <tr>
-        <td class="task-name" (click)="buttonClick(task.id, 'openTask')">{{ task.name}}
+        <td class="task-name"> <span (click)="buttonClick(task.id, 'openTask')">{{ task.name}}</span>
+
+        </td>
+        <td class="edit">
           <button mat-icon-button>
             <mat-icon class="mat-icon">edit</mat-icon>
           </button>
         </td>
-        <td colspan="2"><button mat-button color="primary">{{ task.properties.deadline }}</button></td>
-        <td colspan="2"><button mat-button color="primary">{{ task.properties.executor }}</button></td>
-        <td colspan="2"><button mat-button color="primary">{{ task.properties.priority }}</button></td>
-        <td colspan="2"><button mat-button color="primary">{{ task.properties.status }}</button></td>
+
+        <td colspan="2">
+          <button mat-button color="primary">{{ task.properties.deadline }}</button>
+
+        </td>
+        <td colspan="2">
+          <button mat-button color="primary" [matMenuTriggerFor]="executor">{{ task.properties.executor }}</button>
+          <mat-menu #executor="matMenu">
+            @for (item of executorList; track item.name) {
+              <button mat-menu-item (click)="resetProperty(item.name, task.id, 'setExecutor')">{{ item.name }}</button>
+            }
+          </mat-menu>
+        </td>
+        <td colspan="2">
+          <button mat-button color="primary" [matMenuTriggerFor]="priority">{{ task.properties.priority }}</button>
+          <mat-menu #priority="matMenu">
+            @for (item of priorityList; track item.name) {
+              <button mat-menu-item (click)="resetProperty(item.name, task.id, 'setPriority')">{{ item.name }}</button>
+            }
+          </mat-menu>
+        </td>
+        <td colspan="2">
+          <button mat-button color="primary" [matMenuTriggerFor]="status">{{ task.properties.status }}</button>
+          <mat-menu #status="matMenu">
+            @for (item of statusList; track item.name) {
+              <button mat-menu-item (click)="resetProperty(item.name, task.id, 'setStatus')">{{ item.name }}</button>
+            }
+          </mat-menu>
+        </td>
+        <td class="deleteCol">
+          <div class="delete-button">
+            <button mat-icon-button color="primary" (click)="buttonClick(task.id, 'deleteTask')">
+              <mat-icon class="mat-icon">clear</mat-icon>
+            </button>
+          </div>
+        </td>
       </tr>
     }
+    </tbody>
   </table>
 </div>

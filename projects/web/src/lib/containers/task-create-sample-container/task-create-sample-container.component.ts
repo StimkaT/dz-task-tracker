@@ -2,7 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {
   TaskCreateSampleComponent
 } from "../../../../../ui/src/lib/components/task-create-sample/task-create-sample.component";
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Store} from "@ngrx/store";
 import {getExecutorList, getPriorityList, getStatusList} from "../../+state/tasks/tasks.selectors";
 import {AsyncPipe} from "@angular/common";
@@ -25,22 +25,24 @@ export class TaskCreateSampleContainerComponent {
   statusList$ = this.store$.select(getStatusList);
 
   constructor(
+    public dialogRef: MatDialogRef<TaskCreateSampleContainerComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private store$: Store
   ) {}
 
-  onNoClick(): void {
-  }
-
   events($event: any) {
-    this.store$.dispatch(addNewTask( {
-      name: $event.name,
-      description: $event.description,
-      status: $event.status,
-      priority: $event.priority,
-      executor: $event.executor,
-      deadline: $event.deadline
-    }));
+    if ($event === 'close') {
+      this.dialogRef.close();
+    } else {
+      this.store$.dispatch(addNewTask({
+        name: $event.name,
+        description: $event.description,
+        status: $event.status,
+        priority: $event.priority,
+        executor: $event.executor,
+        deadline: $event.deadline
+      }));
+      this.dialogRef.close();
+    }
   }
-
 }

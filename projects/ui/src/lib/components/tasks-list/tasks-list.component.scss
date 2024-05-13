@@ -9,6 +9,7 @@ table {
 
 .task-name {
   text-align: left;
+  border-right: none;
 }
 
 td {
@@ -27,4 +28,17 @@ td {
   border: none;
 }
 
+.edit {
+  text-align: center;
+  border-left: none;
+  width: 2%;
+}
+
+.name {
+  width: 40%;
+}
+
+.deleteCol {
+  width: 3%;
+}
 

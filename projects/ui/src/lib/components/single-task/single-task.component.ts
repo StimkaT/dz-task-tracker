@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatButtonModule} from "@angular/material/button";
@@ -8,6 +8,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {provideNativeDateAdapter} from "@angular/material/core";
 import {DatePipe} from "@angular/common";
+import {IProperty, ITasksList} from "../../../../../web/src/lib/+state/tasks/tasks.reducer";
 
 @Component({
   selector: 'single-task-page',
@@ -27,5 +28,22 @@ import {DatePipe} from "@angular/common";
   styleUrl: './single-task.component.scss'
 })
 export class SingleTaskComponent {
+  @Output() emitter = new EventEmitter<any>();
+  @Input() activeTask: ITasksList[] | null = [];
+  @Input() executorList: IProperty[] | null = [];
+  @Input() priorityList: IProperty[] | null = [];
+  @Input() statusList: IProperty[] | null = [];
 
+  today = new Date();
+
+  buttonClick(name: string, id: number, note: string) {
+    const message = {
+      name,
+      id,
+      note,
+    }
+    this.emitter.emit(message);
+
+    console.log('устанавливаем значения',  message)
+  }
 }

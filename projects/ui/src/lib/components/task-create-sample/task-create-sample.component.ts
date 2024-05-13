@@ -11,32 +11,31 @@ import {
 } from "@angular/material/dialog";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatMenu, MatMenuItem, MatMenuModule} from "@angular/material/menu";
-import {MatDatepicker, MatDatepickerInput} from "@angular/material/datepicker";
+import {MatDatepicker, MatDatepickerInput, MatDatepickerModule} from "@angular/material/datepicker";
 import { IProperty } from "../../../../../web/src/lib/+state/tasks/tasks.reducer";
+import {provideNativeDateAdapter} from "@angular/material/core";
 
 @Component({
   selector: 'task-create-sample',
   standalone: true,
+  providers: [provideNativeDateAdapter()],
   imports: [
     MatInputModule,
-    FormsModule,
     MatIconModule,
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
-    MatInputModule,
     FormsModule,
-    MatButtonModule,
     MatDialogTitle,
     MatDialogContent,
     MatDialogActions,
     MatDialogClose,
     MatMenu,
     MatMenuItem,
-    MatFormFieldModule,
     MatMenuModule,
     MatDatepicker,
     MatDatepickerInput,
+    MatDatepickerModule,
   ],
   templateUrl: './task-create-sample.component.html',
   styleUrl: './task-create-sample.component.scss'
@@ -97,5 +96,9 @@ export class TaskCreateSampleComponent {
       rout: event$
     };
     this.emitter.emit(message)
+  }
+
+  closePop() {
+    this.emitter.emit('close');
   }
 }
