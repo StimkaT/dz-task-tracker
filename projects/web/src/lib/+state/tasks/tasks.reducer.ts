@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import * as TasksActions from './tasks.actions';
 
-export const TASKS_FEATURE_KEY = 'tasksList';
+export const TASKS_FEATURE_KEY = 'tasksList-1';
 
 export interface ITaskProperties {
   executor: string;
@@ -133,17 +133,20 @@ export const TasksReducer = createReducer(
 
   on(TasksActions.resetExecutor, (state, { id, name }) => ({
     ...state,
-    tasksList: state.tasksList.map((task) => (task.id === id) ? { ...task, properties: { ...task.properties, executor: name } } : task),
+    tasksList: state.tasksList.map((task) =>
+      (task.id === id) ? { ...task, properties: { ...task.properties, executor: name } } : task),
   })),
 
   on(TasksActions.resetPriority, (state, { id, name }) => ({
     ...state,
-    tasksList: state.tasksList.map((task) => (task.id === id) ? { ...task, properties: { ...task.properties, priority: name } } : task),
+    tasksList: state.tasksList.map((task) =>
+      (task.id === id) ? { ...task, properties: { ...task.properties, priority: name } } : task),
   })),
 
   on(TasksActions.resetStatus, (state, { id, name }) => ({
     ...state,
-    tasksList: state.tasksList.map((task) => (task.id === id) ? { ...task, properties: { ...task.properties, status: name } } : task),
+    tasksList: state.tasksList.map((task) =>
+      (task.id === id) ? { ...task, properties: { ...task.properties, status: name } } : task),
   })),
 
 

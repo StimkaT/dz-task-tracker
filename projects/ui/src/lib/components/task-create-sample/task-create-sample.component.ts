@@ -58,19 +58,27 @@ export class TaskCreateSampleComponent {
   User = 'Executor';
   Priority = 'Priority';
   Status = 'Status';
-  Deadline = 0;
+  Deadline = '';
 
-  buttonClick(event: string, note: string) {
+  events(event: any, note:string) {
     if (note === 'setPriority') {
       this.Priority = event;
-    }
-    if (note === 'setStatus') {
+    } else if (note === 'setStatus') {
       this.Status = event;
-    }
-    if (note === 'setExecutor') {
+    } else if (note === 'setExecutor') {
       this.User = event;
+    } else if (note === 'setDeadline') {
+      const date = event.value;
+      const day = date.getDate();
+      const month = date.getMonth() + 1; // Месяцы начинаются с 0
+      const year = date.getFullYear();
+
+      const formattedDate = `${day < 10 ? '0' + day : day}.${month < 10 ? '0' + month : month}.${year}`;
+      console.log('proverka', formattedDate, note);
+      this.Deadline = formattedDate;
     }
-}
+
+  }
 
   createTask(name: string, description: string) {
     if (this.name) {
@@ -84,31 +92,7 @@ export class TaskCreateSampleComponent {
         deadline: this.Deadline,
       };
       this.emitter.emit(message);
-
-      this.name = '';
-      this.description = '';
-      this.User = 'Executor';
-      this.Priority = 'Priority';
-      this.Status = 'Status';
-      this.Deadline = 0;
     }
-  }
-
-  goNext(event$: string){
-    const message = {
-      event: 'ToDoComponent:buttonClick',
-      rout: event$
-    };
-    this.emitter.emit(message)
-  }
-
-
-  events(event: any, note:string) {
-    const message = {
-      event,
-      note
-    };
-    this.emitter.emit(message)
   }
 
   closePop() {

@@ -5,6 +5,7 @@ import {IProperty, ITasksList} from "../../../../../web/src/lib/+state/tasks/tas
 import {MatMenu, MatMenuItem, MatMenuModule} from "@angular/material/menu";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import { FormsModule } from '@angular/forms';
+import {ResetPropertyButtonComponent} from "../reset-property-button/reset-property-button.component";
 
 @Component({
   selector: 'tasks-list',
@@ -18,6 +19,7 @@ import { FormsModule } from '@angular/forms';
     MatMenu,
     MatMenuModule,
     FormsModule,
+    ResetPropertyButtonComponent,
   ],
   templateUrl: './tasks-list.component.html',
   styleUrl: './tasks-list.component.scss'

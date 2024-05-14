@@ -9,6 +9,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {provideNativeDateAdapter} from "@angular/material/core";
 import {DatePipe} from "@angular/common";
 import {IProperty, ITasksList} from "../../../../../web/src/lib/+state/tasks/tasks.reducer";
+import {ResetPropertyButtonComponent} from "../reset-property-button/reset-property-button.component";
 
 @Component({
   selector: 'single-task-page',
@@ -23,6 +24,7 @@ import {IProperty, ITasksList} from "../../../../../web/src/lib/+state/tasks/tas
     MatIconModule,
     MatFormFieldModule,
     DatePipe,
+    ResetPropertyButtonComponent,
   ],
   templateUrl: './single-task.component.html',
   styleUrl: './single-task.component.scss'

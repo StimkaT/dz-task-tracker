@@ -26,6 +26,7 @@ export class NavPanelContainerComponent {
     if ($event === 'popup') {
       const dialogRef = this.dialog.open(TaskCreateSampleContainerComponent, {
         data: {},
+        // disableClose: true,
       });
     } else if ($event === 'tasksList') {
       this.router.navigate(['']);

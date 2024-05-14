@@ -1,9 +1,17 @@
-import { Injectable } from '@angular/core';
-import {createEffect, Actions, ofType, concatLatestFrom,} from '@ngrx/effects';
+import { tap } from "rxjs";
 import { Store } from '@ngrx/store';
-import {sendActiveTask, setActiveTask} from "./tasks.actions";
-import {getTaskList} from "./tasks.selectors";
-import {tap} from "rxjs";
+import { Injectable } from '@angular/core';
+import { getTaskList, selectFeature } from "./tasks.selectors";
+import {
+  addNewTask, clearFilter, deleteTask, editTask, resetExecutor, resetPriority, resetStatus,
+  sendActiveTask,
+  setActiveTask,
+  setFilterExecutor,
+  setFilterPriority,
+  setFilterStatus
+} from "./tasks.actions";
+import {createEffect, Actions, ofType, concatLatestFrom,} from '@ngrx/effects';
+import {TASK_LOCALSTORAGE_KEY} from "../../../../../../src/app/app.component";
 
 
 @Injectable()
@@ -24,16 +32,39 @@ export class TasksEffects {
     }
   );
 
-  // setFilterStatus$ = createEffect(() =>
-  //     this.actions$.pipe(
-  //       ofType(sendFilterStatus),
-  //       concatLatestFrom(() => this.store.select(getTaskList)),
-  //       tap(([{status}, activeTasksList]) => {
-  //         const newActiveTasksList = activeTasksList.filter((task) => task.properties.status === status);
-  //         console.log('Активный', newActiveTasksList);
-  //         this.store.dispatch(setActiveTasksList({newActiveTasksList: newActiveTasksList}));
-  //       })
-  //     ),
+  loadState1$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(
+          addNewTask,
+          setFilterStatus,
+          setFilterExecutor,
+          setFilterPriority,
+          clearFilter,
+          deleteTask,
+          editTask,
+          resetExecutor,
+          resetPriority,
+          resetStatus,
+        ),
+        concatLatestFrom(() => this.store.select(selectFeature)),
+        tap(([{}, state]) => {
+          localStorage.setItem(TASK_LOCALSTORAGE_KEY, JSON.stringify(state));
+        })
+      ),
+    {
+      dispatch: false,
+    }
+  );
+
+  // loadState$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(addNewTask, setFilterStatus),
+  //     mergeMap(action => {
+  //
+  //         localStorage.setItem(TASK_LOCALSTORAGE_KEY, JSON.stringify(state));
+  //
+  //
+  //   ),
   //   {
   //     dispatch: false,
   //   }

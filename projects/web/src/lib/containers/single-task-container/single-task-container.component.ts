@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
-import {SingleTaskComponent} from "../../../../../ui/src/lib/components/single-task/single-task.component";
-import {ActivatedRoute} from "@angular/router";
-import {resetExecutor, resetPriority, resetStatus, sendActiveTask} from "../../+state/tasks/tasks.actions";
 import {Store} from "@ngrx/store";
-import {getActiveTask, getExecutorList, getPriorityList, getStatusList} from "../../+state/tasks/tasks.selectors";
+import {Component} from '@angular/core';
 import {AsyncPipe} from "@angular/common";
+import {ActivatedRoute} from "@angular/router";
 import {TasksListComponent} from "../../../../../ui/src/lib/components/tasks-list/tasks-list.component";
+import {SingleTaskComponent} from "../../../../../ui/src/lib/components/single-task/single-task.component";
+import {resetExecutor, resetPriority, resetStatus, sendActiveTask} from "../../+state/tasks/tasks.actions";
+import {getActiveTask, getExecutorList, getPriorityList, getStatusList} from "../../+state/tasks/tasks.selectors";
 
 @Component({
   selector: 'single-task-container',
@@ -35,22 +35,19 @@ export class SingleTaskContainerComponent {
       let id = +params.get('id')!;
       console.log('id = ', id)
       this.store$.dispatch(sendActiveTask({id}));
+      this.idTask = id
     });
   }
+  idTask: number = -1;
 
   events($event: any) {
-
     if ($event.note === 'setExecutor') {
       this.store$.dispatch(resetExecutor({id: $event.id, name: $event.name}));
-    }
-
-    if ($event.note === 'setPriority') {
+    } else if ($event.note === 'setPriority') {
       this.store$.dispatch(resetPriority({id: $event.id, name: $event.name}));
-    }
-
-    if ($event.note === 'setStatus') {
+    } else if ($event.note === 'setStatus') {
       this.store$.dispatch(resetStatus({id: $event.id, name: $event.name}));
     }
-
+    this.store$.dispatch(sendActiveTask({id: this.idTask}));
   }
 }

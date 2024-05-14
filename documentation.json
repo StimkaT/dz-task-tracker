@@ -9,7 +9,7 @@
     "components": [
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-55a6c5e772cc94ec453a5cb385ef2a8f55ddac1f7531a19f8f40491e7463ca743872b0160d6b6246dae479431117ecf4c41cb010d7692a485fc72d6be3a3ce20",
+            "id": "component-AppComponent-61176b5f4c8c423f350682717a5a9acafc9a1a4d96b3af94ffc1d75005f234287db9b693bc6e992ee5dd7cdf29ce531752d2d1a9f84292f0b85e4440b0005fd8",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -28,6 +28,19 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
+                    "name": "loadStorage",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "",
+                    "line": 31,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
                     "name": "title",
                     "defaultValue": "'dz-task-page-tracker'",
                     "deprecated": false,
@@ -35,10 +48,34 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 18
+                    "line": 23
                 }
             ],
-            "methodsClass": [],
+            "methodsClass": [
+                {
+                    "name": "loadFromStorage",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 43,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 33,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -60,11 +97,52 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\r\nimport { RouterOutlet } from '@angular/router';\r\nimport {NavPanelComponent} from \"../../projects/ui/src/lib/components/nav-panel/nav-panel.component\";\r\nimport {SingleTaskComponent} from \"../../projects/ui/src/lib/components/single-task/single-task.component\";\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  standalone: true,\r\n  imports: [\r\n    RouterOutlet,\r\n    NavPanelComponent,\r\n    SingleTaskComponent,\r\n  ],\r\n  templateUrl: './app.component.html',\r\n  styleUrl: './app.component.scss'\r\n})\r\nexport class AppComponent {\r\n  title = 'dz-task-page-tracker';\r\n}\r\n",
+            "sourceCode": "import {Component, Inject, PLATFORM_ID} from '@angular/core';\r\nimport {RouterOutlet} from '@angular/router';\r\nimport {NavPanelComponent} from \"../../projects/ui/src/lib/components/nav-panel/nav-panel.component\";\r\nimport {SingleTaskComponent} from \"../../projects/ui/src/lib/components/single-task/single-task.component\";\r\nimport {Store} from \"@ngrx/store\";\r\nimport {loadState} from \"../../projects/web/src/lib/+state/tasks/tasks.actions\";\r\nimport {isPlatformBrowser} from \"@angular/common\";\r\n\r\nexport const TASK_LOCALSTORAGE_KEY = 'task'\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  standalone: true,\r\n  imports: [\r\n    RouterOutlet,\r\n    NavPanelComponent,\r\n    SingleTaskComponent,\r\n  ],\r\n  templateUrl: './app.component.html',\r\n  styleUrl: './app.component.scss'\r\n})\r\nexport class AppComponent {\r\n  title = 'dz-task-page-tracker';\r\n\r\n  constructor(\r\n    private store$: Store,\r\n    @Inject(PLATFORM_ID) private platformId: Object,\r\n  ) {}\r\n\r\n\r\n  private loadStorage: boolean = false;\r\n\r\n  ngOnInit() {\r\n    if (this.loadStorage) {\r\n      return\r\n    }\r\n\r\n    this.loadStorage = true;\r\n\r\n    this.loadFromStorage();\r\n  }\r\n\r\n  private loadFromStorage() {\r\n    if (isPlatformBrowser(this.platformId)) {\r\n      const storageState = localStorage.getItem(TASK_LOCALSTORAGE_KEY);\r\n      if (storageState) {\r\n        this.store$.dispatch(loadState({loadState: JSON.parse(storageState)}));\r\n      }\r\n    }\r\n  }\r\n}\r\n",
             "styleUrl": "./app.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "store$",
+                        "type": "Store",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "platformId",
+                        "type": "Object",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 23,
+                "jsdoctags": [
+                    {
+                        "name": "store$",
+                        "type": "Store",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "platformId",
+                        "type": "Object",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
             "extends": [],
             "templateData": "<router-outlet></router-outlet>\r\n"
         }
@@ -111,6 +189,16 @@
                 "deprecationMessage": "",
                 "type": "ApplicationConfig",
                 "defaultValue": "{\r\n  providers: [\r\n    provideServerRendering()\r\n  ]\r\n}"
+            },
+            {
+                "name": "TASK_LOCALSTORAGE_KEY",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/app.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "string",
+                "defaultValue": "'task'"
             }
         ],
         "functions": [],
@@ -162,6 +250,18 @@
                     "type": "ApplicationConfig",
                     "defaultValue": "{\r\n  providers: [\r\n    provideServerRendering()\r\n  ]\r\n}"
                 }
+            ],
+            "src/app/app.component.ts": [
+                {
+                    "name": "TASK_LOCALSTORAGE_KEY",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/app.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "defaultValue": "'task'"
+                }
             ]
         },
         "groupedFunctions": {},
@@ -179,7 +279,17 @@
                 "linktype": "component",
                 "name": "AppComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/2",
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/app.component.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "TASK_LOCALSTORAGE_KEY",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {

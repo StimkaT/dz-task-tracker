@@ -65,18 +65,9 @@ export const resetStatus = createAction(
   props<{ id: number, name: string }>()
 );
 
-
-
-
-
 export const loadState = createAction(
   `[tasks] loadState`,
   props<{ loadState: TasksState }>()
-);
-
-export const markTask = createAction(
-  `[tasks] markTask`,
-  props<{ completed: boolean }>()
 );
 
 

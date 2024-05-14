@@ -72,28 +72,25 @@
 
         </td>
         <td colspan="2">
-          <button mat-button color="primary" [matMenuTriggerFor]="executor">{{ task.properties.executor }}</button>
-          <mat-menu #executor="matMenu">
-            @for (item of executorList; track item.name) {
-              <button mat-menu-item (click)="resetProperty(item.name, task.id, 'setExecutor')">{{ item.name }}</button>
-            }
-          </mat-menu>
+          <reset-property-button
+            [propertiesList]="executorList"
+            [property]="task.properties.executor"
+            (emitter)="resetProperty($event, task.id, 'setExecutor')">
+          </reset-property-button>
         </td>
         <td colspan="2">
-          <button mat-button color="primary" [matMenuTriggerFor]="priority">{{ task.properties.priority }}</button>
-          <mat-menu #priority="matMenu">
-            @for (item of priorityList; track item.name) {
-              <button mat-menu-item (click)="resetProperty(item.name, task.id, 'setPriority')">{{ item.name }}</button>
-            }
-          </mat-menu>
+          <reset-property-button
+            [propertiesList]="priorityList"
+            [property]="task.properties.priority"
+            (emitter)="resetProperty($event, task.id, 'setPriority')">
+          </reset-property-button>
         </td>
         <td colspan="2">
-          <button mat-button color="primary" [matMenuTriggerFor]="status">{{ task.properties.status }}</button>
-          <mat-menu #status="matMenu">
-            @for (item of statusList; track item.name) {
-              <button mat-menu-item (click)="resetProperty(item.name, task.id, 'setStatus')">{{ item.name }}</button>
-            }
-          </mat-menu>
+          <reset-property-button
+            [propertiesList]="statusList"
+            [property]="task.properties.status"
+            (emitter)="resetProperty($event, task.id, 'setStatus')">
+          </reset-property-button>
         </td>
         <td class="deleteCol">
           <div class="delete-button">

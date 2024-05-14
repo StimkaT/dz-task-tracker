@@ -1,12 +1,10 @@
-import {Component, Inject} from '@angular/core';
-import {
-  TaskCreateSampleComponent
-} from "../../../../../ui/src/lib/components/task-create-sample/task-create-sample.component";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Store} from "@ngrx/store";
-import {getExecutorList, getPriorityList, getStatusList} from "../../+state/tasks/tasks.selectors";
 import {AsyncPipe} from "@angular/common";
+import {Component, Inject} from '@angular/core';
 import {addNewTask} from "../../+state/tasks/tasks.actions";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {getExecutorList, getPriorityList, getStatusList} from "../../+state/tasks/tasks.selectors";
+import {TaskCreateSampleComponent} from "../../../../../ui/src/lib/components/task-create-sample/task-create-sample.component";
 
 @Component({
   selector: 'lib-task-create-sample-container',

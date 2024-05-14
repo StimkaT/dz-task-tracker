@@ -35,7 +35,7 @@
     <div align="center">
       <mat-form-field (click)="picker.open()">
         <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="picker">
+        <input matInput [matDatepicker]="picker" (dateChange)="events($event, 'setDeadline')">
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
@@ -43,7 +43,7 @@
 
     <div align="center">
       <task-create-property
-        [label]="Priority"
+        [label]="'Priority'"
         [propertyList]="priorityList"
         (emitter)="events($event, 'setPriority')">
       </task-create-property>
@@ -51,7 +51,7 @@
 
     <div align="center">
       <task-create-property
-        [label]="Status"
+        [label]="'Status'"
         [propertyList]="statusList"
         (emitter)="events($event, 'setStatus')">
       </task-create-property>
