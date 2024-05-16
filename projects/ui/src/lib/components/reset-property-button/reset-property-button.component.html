@@ -1,0 +1,6 @@
+<button mat-button color="primary" [matMenuTriggerFor]="priority">{{ property }}</button>
+<mat-menu #priority="matMenu">
+  @for (item of propertiesList; track item.name) {
+    <button mat-menu-item (click)="resetProperty(item.name)">{{ item.name }}</button>
+  }
+</mat-menu>
