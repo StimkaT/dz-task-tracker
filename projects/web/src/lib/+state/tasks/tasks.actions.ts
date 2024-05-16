@@ -65,6 +65,11 @@ export const resetStatus = createAction(
   props<{ id: number, name: string }>()
 );
 
+export const resetName = createAction(
+  `[tasks] resetName`,
+  props<{ id: number, name: string }>()
+);
+
 export const loadState = createAction(
   `[tasks] loadState`,
   props<{ loadState: TasksState }>()

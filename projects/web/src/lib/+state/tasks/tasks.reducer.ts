@@ -1,5 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import * as TasksActions from './tasks.actions';
+import {resetName} from "./tasks.actions";
 
 export const TASKS_FEATURE_KEY = 'tasksList-1';
 
@@ -147,6 +148,12 @@ export const TasksReducer = createReducer(
     ...state,
     tasksList: state.tasksList.map((task) =>
       (task.id === id) ? { ...task, properties: { ...task.properties, status: name } } : task),
+  })),
+
+  on(TasksActions.resetName, (state, { id, name }) => ({
+    ...state,
+    tasksList: state.tasksList.map((task) =>
+      (task.id === id) ? { ...task, name} : task),
   })),
 
 

@@ -1,0 +1,7 @@
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Edit value" value = "{{task}}"  #inputField>
+  </mat-form-field>
+    <button mat-raised-button color="primary" (click)="onButtonClick(inputField.value)">Submit</button>
+</form>
+

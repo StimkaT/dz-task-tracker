@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
 import {TaskCreateSampleComponent} from "../../../../../ui/src/lib/components/task-create-sample/task-create-sample.component";
 import {
   clearFilter,
-  deleteTask, editTask, resetExecutor, resetPriority, resetStatus,
+  deleteTask, editTask, resetExecutor, resetName, resetPriority, resetStatus,
   setFilterExecutor,
   setFilterPriority,
   setFilterStatus
@@ -63,6 +63,8 @@ export class TasksListContainerComponent {
       this.store$.dispatch(resetPriority({id: $event.id, name: $event.name}));
     } else if ($event.note === 'setStatus') {
       this.store$.dispatch(resetStatus({id: $event.id, name: $event.name}));
+    } else if ($event.note === 'resetNameTask') {
+      this.store$.dispatch(resetName({id: $event.id, name: $event.name}));
     }
   }
 }

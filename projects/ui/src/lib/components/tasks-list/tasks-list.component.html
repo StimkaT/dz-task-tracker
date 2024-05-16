@@ -3,7 +3,7 @@
     <thead>
     <tr>
       <th colspan="11" align="end">
-        <button mat-raised-button color="accent" (click)="buttonClick('clear', 'clearFilter')"> clear filter</button>
+        <button mat-raised-button color="accent" (click)="buttonClick('clear', 'clearFilter')" class="clr"> clear filter</button>
       </th>
     </tr>
     <tr>
@@ -57,50 +57,67 @@
     </thead>
 
     <tbody>
-    @for (task of tasksList; track task.id) {
-      <tr>
-        <td class="task-name"> <span (click)="buttonClick(task.id, 'openTask')">{{ task.name}}</span>
-        </td>
-        <td class="edit">
-          <button mat-icon-button>
-            <mat-icon class="mat-icon">edit</mat-icon>
-          </button>
-        </td>
+      @for (task of tasksList; track task.id) {
+        <tr>
+          @if (editTaskId === task.id) {
+            <td class="task-name">
+              <edit-task [task]="task.name" (emitter)="events($event, task.id, 'resetNameTask')"></edit-task>
+            </td>
+            <td class="edit">
+              <button mat-icon-button (click)="editTaskId = -1">
+                <mat-icon class="mat-icon">cancel</mat-icon>
+              </button>
+            </td>
+          } @else {
+            <td class="task-name">
+              <span (click)="buttonClick(task.id, 'openTask')">{{task.name}}</span>
+            </td>
+            <td class="edit">
+              <button mat-icon-button (click)="editTaskId = task.id">
+                <mat-icon class="mat-icon">edit</mat-icon>
+              </button>
+            </td>
+          }
 
-        <td colspan="2">
-          <button mat-button color="primary">{{ task.properties.deadline }}</button>
+          <td colspan="2">
 
-        </td>
-        <td colspan="2">
-          <reset-property-button
-            [propertiesList]="executorList"
-            [property]="task.properties.executor"
-            (emitter)="resetProperty($event, task.id, 'setExecutor')">
-          </reset-property-button>
-        </td>
-        <td colspan="2">
-          <reset-property-button
-            [propertiesList]="priorityList"
-            [property]="task.properties.priority"
-            (emitter)="resetProperty($event, task.id, 'setPriority')">
-          </reset-property-button>
-        </td>
-        <td colspan="2">
-          <reset-property-button
-            [propertiesList]="statusList"
-            [property]="task.properties.status"
-            (emitter)="resetProperty($event, task.id, 'setStatus')">
-          </reset-property-button>
-        </td>
-        <td class="deleteCol">
-          <div class="delete-button">
-            <button mat-icon-button color="primary" (click)="buttonClick(task.id, 'deleteTask')">
-              <mat-icon class="mat-icon">clear</mat-icon>
-            </button>
-          </div>
-        </td>
-      </tr>
-    }
+            <mat-form-field (click)="picker.open()">
+              <input matInput [matDatepicker]="picker" value="{{ task.properties.deadline }}" (dateChange)="resetProperty($event, task.id,'setDeadline')">
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <button mat-button color="primary">{{ task.properties.deadline }}</button>
+          </td>
+          <td colspan="2">
+            <reset-property-button
+              [propertiesList]="executorList"
+              [property]="task.properties.executor"
+              (emitter)="resetProperty($event, task.id, 'setExecutor')">
+            </reset-property-button>
+          </td>
+          <td colspan="2">
+            <reset-property-button
+              [propertiesList]="priorityList"
+              [property]="task.properties.priority"
+              (emitter)="resetProperty($event, task.id, 'setPriority')">
+            </reset-property-button>
+          </td>
+          <td colspan="2">
+            <reset-property-button
+              [propertiesList]="statusList"
+              [property]="task.properties.status"
+              (emitter)="resetProperty($event, task.id, 'setStatus')">
+            </reset-property-button>
+          </td>
+          <td class="deleteCol">
+            <div class="delete-button">
+              <button mat-icon-button color="primary" (click)="buttonClick(task.id, 'deleteTask')">
+                <mat-icon class="mat-icon">clear</mat-icon>
+              </button>
+            </div>
+          </td>
+        </tr>
+      }
     </tbody>
   </table>
 </div>
